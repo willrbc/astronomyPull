@@ -1,0 +1,23 @@
+<template name="validatedInput">
+  <div class="form-group has-feedback {{class}} {{#if doc.hasValidationError fieldName}}has-error{{/if}}  {{#if getState 'validNotEmpty'}}has-success{{/if}}">
+
+       {{#if hideLabel}}
+      <label class="sr-only" for="{{fieldName}}">{{label}}</label>{{else}}
+      <label class="control-label" for="{{fieldName}}">{{label}}</label>
+      {{/if}}
+      <div class="{{#if hasGroup}}input-group{{/if}}">
+      {{#if before}} {{>Template.contentBlock}} {{/if}}
+      <input type="text" class="form-control {{#if doc.hasValidationError fieldName}}error{{/if}}" id="{{fieldName}}" placeholder="{{label}}" value="{{value}}"> {{#unless hideError}} {{#if doc.hasValidationError fieldName}}
+      <span class="form-control-feedback" aria-hidden="true"><i class="fa fa-times"></i></span>
+      <span id="inputSuccess2Status" class="sr-only">(error)</span>
+      <span class="help-block">
+        <small class="error">{{doc.getValidationError fieldName}}</small>
+      </span>
+      {{/if}} {{#if getState 'validNotEmpty'}}
+      <span class="form-control-feedback" aria-hidden="true"><i class="fa fa-check"></i></span>
+      <span class="sr-only">(success)</span>
+      {{/if}} {{/unless}} {{#if after}} {{>Template.contentBlock}} {{/if}}
+
+    </div>
+  </div>
+</template>

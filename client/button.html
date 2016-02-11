@@ -1,0 +1,11 @@
+<template name="button">
+  <button data-toggle="{{#if tooltip}}tooltip{{/if}}" title="{{tooltip}}" class="btn btn-default {{class}} {{#if confirm}}{{#if getState 'clicked'}} btn-warning{{/if}}{{/if}}" type="{{#if type}}{{type}}{{else}}button{{/if}}" data-placement="{{#if placement}}{{placement}}{{/if}}">
+    {{#if confirm}} {{#if getState 'clicked'}} {{confirm}} {{else}} {{> Template.contentBlock}} {{/if}} {{else}} {{> Template.contentBlock}} {{/if}} {{#if icon}}<i class="fa fa-{{icon}}"></i>{{/if}}
+  </button>
+</template>
+
+<template name="tooltip">
+  <span data-toggle="tooltip" title="{{tooltip}}" data-placement="{{#if placement}}{{placement}}{{/if}}">
+    {{> Template.contentBlock}}
+  </span>
+</template>

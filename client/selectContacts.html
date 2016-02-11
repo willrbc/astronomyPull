@@ -1,0 +1,12 @@
+<template name="selectContacts">
+<p class="bg-info">Add a contact to start</p>
+    <button class="btn btn-success newContact">New</button>
+    <ul class="contacts">
+      {{#each contacts}}
+      <li>
+        <button class="btn btn-default btn-xs editContact pull-right"><i class="fa fa-pencil"></i></button>
+ {{name.fullName}}<br/><small>{{position}}</small>
+      </li>
+      {{/each}}
+    </ul>
+</template>
