@@ -16,6 +16,7 @@ ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
 ddp-server@1.2.2
+deanius:debug-ddp@1.0.5
 deps@1.0.9
 diff-sequence@1.0.1
 ecmascript@0.1.6

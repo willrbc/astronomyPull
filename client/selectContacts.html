@@ -1,12 +1,26 @@
 <template name="selectContacts">
-<p class="bg-info">Add a contact to start</p>
-    <button class="btn btn-success newContact">New</button>
-    <ul class="contacts">
-      {{#each contacts}}
+  <p class="bg-info">Press new to create a document<br/>
+    Fields are saved on change.  Try creating a nested value, each one will have a number field with a default of 1 and a number field without default.
+    You can change both fields successfully, however try setting it back to the default value of 1 and it doesn't work.  The field is never sent to the database, somewhere in the code, astronomy believes the field to be unchanged.
+    Removing the 'timestamp' behaviour from the model fixes this.</p>
+
+  <button class="btn btn-success newContact">New</button>
+  <ul class="contacts">
+    {{#each contacts}}
       <li>
-        <button class="btn btn-default btn-xs editContact pull-right"><i class="fa fa-pencil"></i></button>
- {{name.fullName}}<br/><small>{{position}}</small>
+        {{_id}}
+        {{>validatedInput class="form-group-sm" type="number" hideLabel=true label='Top Level Number' context=this fieldName='topLevelNumber' autoSave=true doc=this}}
+        <button class="btn btn-success newNested">New nested value</button>
+
+        <ul class="number">
+          {{#each nestedNumbers}}
+            <li>Number with default value:
+              {{numberWithDefault}}<br/>Edit:{{>validatedInput class="form-group-sm" type="number" hideLabel=true label='Nested number with default value' context=this fieldName='numberWithDefault' autoSave=true doc=..}}<br/>
+              Number without default value:
+              {{numberWithoutDefault}}<br/>Edit:{{>validatedInput class="form-group-sm" type="number" hideLabel=true label='Nested number without default value' context=this fieldName='numberWithoutDefault' autoSave=true doc=..}}</li>
+          {{/each}}
+        </ul>
       </li>
-      {{/each}}
-    </ul>
+    {{/each}}
+  </ul>
 </template>

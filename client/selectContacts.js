@@ -5,19 +5,13 @@ Template.selectContacts.helpers({
 });
 Template.selectContacts.events({
   "click .newContact": function (e, tmpl) {
-    var data = {
-      contact: new Models.Contacts.Person(),
-      isNew: true
-    };
-    Modal.show('editContact', data, {}, tmpl.view);
+    var c = new Models.Contacts.Person();
+    c.save();
   },
-  "click .editContact": function (e, tmpl) {
-    var data = {
-      contact: this,
-      isNew: false
-    };
-    console.log(data.contact);
-    Modal.show('editContact', data, {}, tmpl.view);
+  "click .newNested": function (e, tmpl) {
+    
+    this.push("nestedNumbers", new Models.Contacts.Nested());
+    this.save();
   }
 });
 

@@ -7,7 +7,7 @@
       {{/if}}
       <div class="{{#if hasGroup}}input-group{{/if}}">
       {{#if before}} {{>Template.contentBlock}} {{/if}}
-      <input type="text" class="form-control {{#if doc.hasValidationError fieldName}}error{{/if}}" id="{{fieldName}}" placeholder="{{label}}" value="{{value}}"> {{#unless hideError}} {{#if doc.hasValidationError fieldName}}
+      <input type="{{type}}" class="form-control {{#if doc.hasValidationError fieldName}}error{{/if}}" id="{{fieldName}}" placeholder="{{label}}" value="{{value}}"> {{#unless hideError}} {{#if doc.hasValidationError fieldName}}
       <span class="form-control-feedback" aria-hidden="true"><i class="fa fa-times"></i></span>
       <span id="inputSuccess2Status" class="sr-only">(error)</span>
       <span class="help-block">

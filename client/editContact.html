@@ -8,41 +8,56 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">
-              {{#if isNew}} New contact {{else}} Edit contact {{/if}}
+              {{#if isNew}}
+                New contact
+              {{else}}
+                Edit contact
+              {{/if}}
             </h4>
           </div>
           <div class="modal-body">
-            {{#with getContact}} {{#if hasValidationErrors}} {{#each getValidationErros}}
-            <p>Error: {{message}}</p>
-            {{/each}} {{/if}}
-            <div class="form">
-              <fieldset>
-                {{#with name}}
-                <label class="control-label">Name</label>
-                <div class="row">
-                  <div class="col-xs-3">
-                    {{>validatedInput hideLabel=true label='Title' doc=this fieldName='title'}}
-                  </div>
-                  <div class="col-sm-4">
-                    {{>validatedInput hideLabel=true label='First Name' doc=this fieldName='first'}}
-                  </div>
-                  <div class="col-sm-5">
-                    {{>validatedInput hideLabel=true label='Last Name' doc=this fieldName='last'}}
-                  </div>
-                </div>
-                {{/with}}
+            {{#with getContact}}
+              {{#if hasValidationErrors}}
+                {{#each getValidationErros}}
+                  <p>Error:
+                    {{message}}</p>
+                {{/each}}
+              {{/if}}
+              <div class="form">
+                <fieldset>
+                  {{#with name}}
+                    <label class="control-label">Name</label>
+                    <div class="row">
+                      <div class="col-xs-3">
+                        {{>validatedInput hideLabel=true label='Title' context=this fieldName='title'}}
+                      </div>
+                      <div class="col-sm-4">
+                        {{>validatedInput hideLabel=true label='First Name' context=this fieldName='first'}}
+                      </div>
+                      <div class="col-sm-5">
+                        {{>validatedInput hideLabel=true label='Last Name' context=this fieldName='last'}}
+                      </div>
+                    </div>
+                  {{/with}}
 
-                 {{>validatedInput label='Position' doc=this fieldName='position'}}
+                  {{>validatedInput label='Position' doc=this fieldName='position'}}
 
-                <p class="bg-info">Try adding a phone number. You will notice that you cannot delete it straight away. The 'pull' function fails, despite it appearing to be identical to the item in the array.</p>
-                <label>Phone Numbers: {{>button class="btn-success addTelephone btn-xs" icon="plus"}}</label>
-                {{#each telephone}} {{>editPhone}} {{/each}}
-              </fieldset>
-            </div>
+                  <p class="bg-info">Try adding a phone number. You will notice that you cannot delete it straight away. The 'pull' function fails, despite it appearing to be identical to the item in the array.</p>
+                  <label>Phone Numbers:
+                    {{>button class="btn-success addTelephone btn-xs" icon="plus"}}</label>
+                  {{#each telephone}}
+                    {{>editPhone}}
+                  {{/each}}
+                </fieldset>
+              </div>
             {{/with}}
           </div>
           <div class="modal-footer">
-            {{#unless isNew}} {{#button confirm="Are you sure?" class="btn btn-danger pull-left deleteContact" icon="trash"}}Delete{{/button}}{{/unless}} {{#button class="btn btn-default cancel"}}Cancel{{/button}} {{#button type="submit" class="btn btn-success" icon="disk"}}Save{{/button}}
+            {{#unless isNew}}
+              {{#button confirm="Are you sure?" class="btn btn-danger pull-left deleteContact" icon="trash"}}Delete{{/button}}
+            {{/unless}}
+            {{#button class="btn btn-default cancel"}}Cancel{{/button}}
+            {{#button type="submit" class="btn btn-success" icon="disk"}}Save{{/button}}
           </div>
         </form>
       </div>
@@ -51,21 +66,33 @@
 
 </template>
 <template name="editPhone">
-  {{#validatedInput class="form-group-sm" hideLabel=true label='Phone Number' doc=this fieldName='number' before=true hasGroup=true}}
-  <div class="input-group-btn input-group-btn-sm">
-    {{>button doc=this confirm="Really delete?" class="deleteTelephone btn-danger  btn-sm" icon="trash"}}
-    <button type="button" class="btn btn-default btn-sm dropdown-toggle selectType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{type}}
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu selectType">
-      <li><a href="#">Office</a></li>
-      <li><a href="#">Direct</a></li>
-      <li><a href="#">Mobile</a></li>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Work Mobile</a></li>
-      <li><a href="#">Fax</a></li>
-    </ul>
-  </div>
-  <!-- /btn-group -->
+  {{#validatedInput class="form-group-sm" hideLabel=true label='Phone Number' context=this fieldName='number' before=true hasGroup=true}}
+    <div class="input-group-btn input-group-btn-sm">
+      {{>button doc=this confirm="Really delete?" class="deleteTelephone btn-danger  btn-sm" icon="trash"}}
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle selectType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{type}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu selectType">
+        <li>
+          <a href="#">Office</a>
+        </li>
+        <li>
+          <a href="#">Direct</a>
+        </li>
+        <li>
+          <a href="#">Mobile</a>
+        </li>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Work Mobile</a>
+        </li>
+        <li>
+          <a href="#">Fax</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /btn-group -->
   {{/validatedInput}}
 </template>

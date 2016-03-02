@@ -1,22 +1,26 @@
 Template.validatedInput.helpers({
   value: function () {
     return Template.instance()
-      .data.doc[Template.instance()
+      .data.context[Template.instance()
         .data.fieldName];
   }
 });
 
 Template.validatedInput.events({
-  "blur input": function (e, tmpl) {
-    var doc = this.doc; // Instance of User, Phone or Address class.
+  "change input": function (e, tmpl) {
+    var context = this.context; // Instance of User, Phone or Address class.
     var input = e.currentTarget;
     // Set a value of a field in an instance of User, Phone or Address class.
-    doc.set(input.id, input.value);
+    context.set(input.id, input.value);
     // Validate given field.
-    tmpl.state.set('valid', doc.validate(input.id) ? true : false);
+    tmpl.state.set('valid', context.validate(input.id) ? true : false);
     tmpl.state.set('set', (input.value !== "") ? true : false);
-    tmpl.state.set('validNotEmpty', (input.value !== "" && doc.validate(input.id)) ? true : false);
-    // console.log(input.id, doc, Template.parentData(1), Template.parentData(2), doc.validate(input.id));
+    tmpl.state.set('validNotEmpty', (input.value !== "" && context.validate(input.id)) ? true : false);
+    if (tmpl.data.autoSave){
+      tmpl.data.doc.save();
+    }
+
+    // console.log(input.id, context, Template.parentData(1), Template.parentData(2), context.validate(input.id));
   },
   'focus input': function (e) {
     $(e.currentTarget)
